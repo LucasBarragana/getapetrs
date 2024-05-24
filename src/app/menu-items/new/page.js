@@ -1,17 +1,19 @@
 'use client';
+import dynamic from 'next/dynamic';
 import Left from "@/app/components/icons/Left";
-import MenuItemForm from "@/app/components/layout/MenuItemForm";
 import UserTabs from "@/app/components/layout/UserTabs";
 import { useProfile } from "@/app/components/UseProfile";
 import Link from "next/link";
-import {redirect} from "next/navigation";
-import {useState} from "react";
+import { redirect } from "next/navigation";
+import { useState } from "react";
 import toast from "react-hot-toast";
 
-export default function NewMenuItemPage() {
+// Dynamically import MenuItemForm with SSR disabled
+const MenuItemForm = dynamic(() => import('@/app/components/layout/MenuItemForm'), { ssr: false });
 
+export default function NewMenuItemPage() {
   const [redirectToItems, setRedirectToItems] = useState(false);
-  const {loading, data} = useProfile();
+  const { loading, data } = useProfile();
 
   async function handleFormSubmit(ev, data) {
     ev.preventDefault();

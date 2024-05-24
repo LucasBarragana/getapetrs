@@ -11,7 +11,7 @@ export default function MenuItemForm({onSubmit, menuItem}) {
   const [image, setImage] = useState(menuItem?.image || '');
   const [name, setName] = useState(menuItem?.name || '');
   const [description, setDescription] = useState(menuItem?.description || '');
-  const [sizes, setSizes] = useState(menuItem?.sizes || []);
+  const [sizes, setSizes] = useState(menuItem?.sizes || '');
   const [category, setCategory] = useState(menuItem?.category || '');
   
 
@@ -44,7 +44,7 @@ export default function MenuItemForm({onSubmit, menuItem}) {
           <ReactQuill
             value={description}
             onChange={setDescription}
-            className="h-60 bg-gray-100 pb-12"
+            className="h-60 bg-gray-100 pb-16 mb-4"
           />
           <label>Categoria</label>
           <select value={category} onChange={ev => setCategory(ev.target.value)}>

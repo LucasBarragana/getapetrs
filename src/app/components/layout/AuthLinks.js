@@ -1,4 +1,5 @@
 'use client';
+import { useEffect } from "react";
 import { signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
@@ -12,28 +13,37 @@ import More from "../icons/More";
 
 export default function AuthLinks({ status, userName }) {
   const { data: loggedInUserData } = useProfile();
-  function myFunction() {
-      document.getElementById("myDropdown").classList.toggle("show");
-    }
-  
-  window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn')) {
-      var dropdowns = document.getElementsByClassName("dropdown-content");
-      var i;
-      for (i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
+
+  useEffect(() => {
+    function handleWindowClick(event) {
+      if (!event.target.matches('.dropbtn')) {
+        var dropdowns = document.getElementsByClassName("dropdown-content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
         }
       }
     }
+
+    window.addEventListener('click', handleWindowClick);
+
+    return () => {
+      window.removeEventListener('click', handleWindowClick);
+    };
+  }, []);
+
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
   }
 
   if (status === 'authenticated') {
     return (
       <div className="dropdown">
         <button onClick={myFunction} className="dropbtn">Olá, {userName} <More className="ml-2" /></button>
-        <div id="myDropdown" className="dropdown-content ">
+        <div id="myDropdown" className="dropdown-content">
           <div className="flex items-center pl-4 hover:bg-gray-300">
             <Person className="mr-2" />
             <Link href="/profile" className="flex items-center"> Meu Perfil</Link>
@@ -60,7 +70,7 @@ export default function AuthLinks({ status, userName }) {
 
   if (status === 'unauthenticated') {
     return (
-      <div className="relative inline-block text-left" ref={dropdownRef}>
+      <div className="relative inline-block text-left">
         <button onClick={myFunction} className="dropbtn inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
           Login/Registrar-se
         </button>
