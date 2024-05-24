@@ -62,7 +62,7 @@ export default function AuthLinks({ status, userName }) {
               <Link href="/menu-items/new" className="flex items-center"> Add um Pet</Link>
             </div>
           )}
-          <button className="text-red-500 flex items-center hover:bg-gray-300" onClick={() => signOut()}><Logout className="mr-2" /> Sair</button>
+          <button className="text-red-500 flex items-center hover:bg-gray-300" onClick={() => signOut({ callbackUrl: '/' })}><Logout className="mr-2" /> Sair</button>
         </div>
       </div>
     );

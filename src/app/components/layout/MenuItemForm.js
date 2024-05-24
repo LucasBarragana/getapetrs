@@ -1,23 +1,23 @@
-'use client'
+'use client';
 
 import EditableImage from "./EditableImage";
-import { useState} from "react";
+import { useState } from "react";
 import categoriesData from "@/data/categories";
 import sizesData from "@/data/sizes";
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-export default function MenuItemForm({onSubmit, menuItem}) {
+export default function MenuItemForm({ onSubmit, menuItem }) {
   const [image, setImage] = useState(menuItem?.image || '');
   const [name, setName] = useState(menuItem?.name || '');
   const [description, setDescription] = useState(menuItem?.description || '');
   const [sizes, setSizes] = useState(menuItem?.sizes || '');
   const [category, setCategory] = useState(menuItem?.category || '');
-  
 
   return (
     <form
       onSubmit={ev => {
+        ev.preventDefault();
         onSubmit({
           image,
           name,
@@ -29,7 +29,7 @@ export default function MenuItemForm({onSubmit, menuItem}) {
       className="mt-8 max-w-2xl mx-auto">
       <div
         className="md:grid items-start gap-4"
-        style={{gridTemplateColumns: '.3fr .7fr'}}>
+        style={{ gridTemplateColumns: '.3fr .7fr' }}>
         <div>
           <EditableImage link={image} setLink={setImage} />
         </div>

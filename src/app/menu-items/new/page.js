@@ -1,4 +1,5 @@
 'use client';
+
 import dynamic from 'next/dynamic';
 import Left from "@/app/components/icons/Left";
 import UserTabs from "@/app/components/layout/UserTabs";
@@ -15,18 +16,15 @@ export default function NewMenuItemPage() {
   const [redirectToItems, setRedirectToItems] = useState(false);
   const { loading, data } = useProfile();
 
-  async function handleFormSubmit(ev, data) {
-    ev.preventDefault();
+  async function handleFormSubmit(data) {
     const savingPromise = new Promise(async (resolve, reject) => {
       const response = await fetch('/api/menu-items', {
         method: 'POST',
         body: JSON.stringify(data),
         headers: { 'Content-Type': 'application/json' },
       });
-      if (response.ok)
-        resolve();
-      else
-        reject();
+      if (response.ok) resolve();
+      else reject();
     });
 
     await toast.promise(savingPromise, {
