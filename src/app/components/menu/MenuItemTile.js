@@ -1,11 +1,9 @@
 'use client'
-import AddToCartButton from "./AddToCartButton";
 
-export default function MenuItemTile({onAddToCart, ...item}) {
+export default function MenuItemTile({ onClick, ...item}) {
   const {image, description, name,
     sizes
   } = item;
-  const hasSizesOrExtras = sizes?.length > 0 || extraIngredientPrices?.length > 0;
   return (
     <div className="bg-gray-200 p-4 rounded-lg text-center
       group hover:bg-white hover:shadow-md hover:shadow-black/25 transition-all">
@@ -19,11 +17,13 @@ export default function MenuItemTile({onAddToCart, ...item}) {
       <p className="text-gray-500 text-sm line-clamp-3">
         {sizes}
       </p>
-      <AddToCartButton
-        image={image}
-        hasSizesOrExtras={hasSizesOrExtras}
-        onClick={onAddToCart}
-      />
+      <button
+      type="button"
+      onClick={onClick}
+      className="mt-4 bg-primary text-white rounded-full px-8 py-2 hover:bg-orange-600"      
+    >
+      <span>ADOTE</span>
+    </button>
     </div>
   );
 }

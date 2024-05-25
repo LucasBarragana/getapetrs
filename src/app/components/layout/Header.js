@@ -9,8 +9,10 @@ import AuthLinks from "./AuthLinks";
 export default function Header() {
   const session = useSession();
   const status = session?.status;
+  console.log(session)
   console.log(status)
   const userData = session.data?.user;
+  console.log(userData)
   let userName = userData?.name || userData?.email;
   const { cartProducts } = useContext(CartContext);
   if (userName && userName.includes(" ")) {

@@ -3,6 +3,7 @@ import Header from "./components/layout/Header";
 import { Roboto } from 'next/font/google'
 import './globals.css'
 import {Toaster} from "react-hot-toast";
+import Footer from "./components/layout/Footer";
 
 const roboto = Roboto({ subsets: ['latin'], weight: ['400', '500', '700'] })
 
@@ -20,9 +21,7 @@ export default function RootLayout({ children }) {
               <Toaster />
               <Header />
               {children}
-              <footer className="border-t p-8 text-center text-gray-500 mt-16">
-                &copy; 2023 All rights reserved - Dev. Lucas Oliveira Barragana
-              </footer>
+              <Footer />
             </AppProvider>
           </main>
       </body>
